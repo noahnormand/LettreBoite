@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LettreBoite - Détails</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-content">
+            <a href="index.html" class="logo">
+                <h1>LettreBoite</h1>
+            </a>
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="index.html">Films</a></li>
+                    <li><a href="#">Séries</a></li>
+                    <li><a href="#">Populaires</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <article class="focus-article" id="media-details">
+            <section class="focus-banner">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                    <div class="poster-container" id="media-poster">
+                        <div class="placeholder-img" style="width: 300px; height: 450px; background: #ddd; border-radius: 0;"></div>
+                    </div>
+                    <div class="info-container">
+                        <h1 class="title" id="media-title">Titre du Film <span class="year">(2026)</span></h1>
+                        <div class="meta-data">
+                            <div class="rating-badge large-badge" id="media-rating">
+                                <span>80%</span>
+                            </div>
+                            <span class="release-date" id="media-release-date">10/06/2026 (FR)</span>
+                            <span class="genres" id="media-genres">Action, Aventure, Science-Fiction</span>
+                            <span class="runtime" id="media-runtime">2h 15m</span>
+                        </div>
+                        
+                        <div class="synopsis-section">
+                            <h3>Synopsis</h3>
+                            <p class="overview" id="media-overview">Détails de l'histoire et résumé complet du film...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="media-section cast-section">
+                <div class="section-header">
+                    <h2>Casting (Têtes d'affiche)</h2>
+                </div>
+                <!-- On réutilise la même structure de grille mais avec une classe spécifique si besoin -->
+                <div class="cards-grid cast-grid" id="cast-grid">
+                    <div class="actor-card movie-card">
+                        <div class="card-image-wrapper actor-image">
+                            <div class="placeholder-img" style="width: 100%; aspect-ratio: 138/175; background: #ddd; border-radius: 0;"></div>
+                        </div>
+                        <div class="card-content actor-info">
+                            <h4>Nom Acteur</h4>
+                            <p class="release-date">Nom Personnage</p>
+                        </div>
+                    </div>
+                     <div class="actor-card movie-card">
+                        <div class="card-image-wrapper actor-image">
+                            <div class="placeholder-img" style="width: 100%; aspect-ratio: 138/175; background: #ddd; border-radius: 0;"></div>
+                        </div>
+                        <div class="card-content actor-info">
+                            <h4>Acteur 2</h4>
+                            <p class="release-date">Personnage 2</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Projet Film TMDB. Clone design Figma.</p>
+    </footer>
+</body>
+</html>
