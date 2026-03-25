@@ -2,103 +2,103 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet Film TMDB - Accueil</title>
-    <!-- On inclura le CSS plus tard dans l'étape suivante -->
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Projet Film LettreBoite - Accueil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
-    <header class="navbar">
-        <div class="navbar-content">
-            <a href="index.html" class="logo">
-                <!-- Placeholder pour le logo Figma -->
-                <h1>Projet movie</h1>
-            </a>
-            <nav class="nav-links">
-                <ul>
-                    <li><a href="#">Films</a></li>
-                    <li><a href="#">Séries</a></li>
-                    <li><a href="#">Populaires</a></li>
-                </ul>
-            </nav>
+<header class="navbar">
+    <div class="navbar-content">
+        <a class="logo" href="index.html">
+
+            <h1>Projet movie</h1>
+        </a>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="#">Films</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a href="#">Populaires</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>Bienvenue.</h2>
+            <p>Des millions de films, séries télévisées et personnalités. Explorez maintenant.</p>
+
+            <div class="search-box">
+                <input id="search-input" placeholder="Rechercher un film, une série, un acteur..." type="text">
+                <button id="search-btn">Rechercher</button>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <!-- Section Hero (Bannière et Recherche) -->
-        <section class="hero">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h2>Bienvenue.</h2>
-                <p>Des millions de films, séries télévisées et personnalités. Explorez maintenant.</p>
-                
-                <div class="search-box">
-                    <input type="text" id="search-input" placeholder="Rechercher un film, une série, un acteur...">
-                    <button id="search-btn">Rechercher</button>
+
+    <section class="media-section" id="trending-section">
+        <div class="section-header">
+            <h2>Tendances</h2>
+            <div class="toggle-group">
+                <button class="toggle-btn active" data-filter="day">Aujourd'hui</button>
+                <button class="toggle-btn" data-filter="week">Cette semaine</button>
+            </div>
+        </div>
+
+        <div class="cards-grid" id="trending-grid">
+
+            <article class="movie-card">
+                <div class="card-image-wrapper">
+
+                    <div class="placeholder-img"
+                         style="width: 150px; height: 225px; background: #ddd; border-radius: 8px;"></div>
+                    <div class="rating-badge">
+                        <span>75%</span>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Section Tendances -->
-        <section class="media-section" id="trending-section">
-            <div class="section-header">
-                <h2>Tendances</h2>
-                <div class="toggle-group">
-                    <button class="toggle-btn active" data-filter="day">Aujourd'hui</button>
-                    <button class="toggle-btn" data-filter="week">Cette semaine</button>
+                <div class="card-content">
+                    <h3>Dune 15 sept 2021</h3>
+                    <p class="release-date">15 sept 2021</p>
                 </div>
-            </div>
-            
-            <div class="cards-grid" id="trending-grid">
-                <!-- Exemple de carte HTML (hardcodée) pour valider le squelette -->
-                <article class="movie-card">
-                    <div class="card-image-wrapper">
-                        <!-- Image temporaire -->
-                        <div class="placeholder-img" style="width: 150px; height: 225px; background: #ddd; border-radius: 8px;"></div>
-                        <div class="rating-badge">
-                            <span>75%</span>
-                        </div>
+            </article>
+            <article class="movie-card">
+                <div class="card-image-wrapper">
+                    <!-- Image temporaire -->
+                    <div class="placeholder-img"
+                         style="width: 150px; height: 225px; background: #ddd; border-radius: 8px;"></div>
+                    <div class="rating-badge">
+                        <span>82%</span>
                     </div>
-                    <div class="card-content">
-                        <h3>Dune 15 sept 2021</h3>
-                        <p class="release-date">15 sept 2021</p>
-                    </div>
-                </article>
-                <article class="movie-card">
-                    <div class="card-image-wrapper">
-                        <!-- Image temporaire -->
-                        <div class="placeholder-img" style="width: 150px; height: 225px; background: #ddd; border-radius: 8px;"></div>
-                        <div class="rating-badge">
-                            <span>82%</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Squid Game</h3>
-                        <p class="release-date">15 sept 2021</p>
-                    </div>
-                </article>
-            </div>
-        </section>
+                </div>
+                <div class="card-content">
+                    <h3>Squid Game</h3>
+                    <p class="release-date">15 sept 2021</p>
+                </div>
+            </article>
+        </div>
+    </section>
 
-        <!-- Section Séries Populaires -->
-        <section class="media-section" id="series-section">
-            <div class="section-header">
-                <h2>Films Séries Populaires</h2>
-            </div>
-            
-            <div class="cards-grid" id="series-grid">
-                <!-- Les cartes seront générées ici par le JS plus tard -->
-            </div>
-        </section>
 
-    </main>
+    <section class="media-section" id="series-section">
+        <div class="section-header">
+            <h2>Films Séries Populaires</h2>
+        </div>
 
-    <footer class="footer">
-        <p>&copy; 2026 Projet Film TMDB. Clone design Figma.</p>
-    </footer>
+        <div class="cards-grid" id="series-grid">
 
-    <!-- On inclura le script plus tard -->
-    <!-- <script src="js/app.js"></script> -->
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Projet Film TMDB. Clone design Figma.</p>
+</footer>
+
+
 </body>
 </html>
