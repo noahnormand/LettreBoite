@@ -6,7 +6,7 @@
   --text-main: #000000;
   --text-inverse: #ffffff;
   --text-muted: #adb5bd;
-  --font-family: 'Source Sans Pro', Arial, sans-serif;
+  --font-family: 'Roboto', sans-serif;
   --border-radius: 0px;
   --gap-standard: 20px;
 }
@@ -79,10 +79,12 @@ button {
     font-weight: 600;
 
     & li a {
-      transition: color 0.2s ease;
+      transition: all 0.2s ease;
 
       &:hover {
-        color: var(--tmdb-green);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        color: var(--text-inverse);
       }
     }
   }
@@ -215,10 +217,15 @@ button {
         transform: translateY(-5px);
       }
 
+      &:hover .card-image-wrapper {
+        box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+      }
+
       & .card-image-wrapper {
         position: relative;
         width: 100%;
         margin-bottom: 25px;
+        transition: box-shadow 0.3s ease;
 
         & img, & .placeholder-img {
           width: 100%;
@@ -232,7 +239,7 @@ button {
         & .rating-badge {
           position: absolute;
           bottom: -18px;
-          left: 10px;
+          right: 15px;
           width: 38px;
           height: 38px;
           border-radius: 50%;
