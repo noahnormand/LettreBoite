@@ -28,12 +28,12 @@ class TMDBApi {
         return this.fetchAPI(`/trending/all/${timeWindow}`);
     }
 
-    async getMovies() {
-        return this.fetchAPI('/movie/popular');
+    async getMovies(filter = 'popular') {
+        return this.fetchAPI(`/movie/${filter}`);
     }
 
-    async getSeries() {
-        return this.fetchAPI('/tv/popular');
+    async getSeries(filter = 'popular') {
+        return this.fetchAPI(`/tv/${filter}`);
     }
 
     async search(query) {

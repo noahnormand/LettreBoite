@@ -1,7 +1,7 @@
 class Affichage {
     constructor() {
         this.imageBaseUrl = 'https://image.tmdb.org/t/p/w500';
-        this.fallbackImage = 'assets/placeholder.jpg';
+        this.fallbackImage = 'https://placehold.co/500x750/032541/FFFFFF?text=Indisponible';
     }
 
     getImageUrl(path) {

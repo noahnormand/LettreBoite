@@ -209,6 +209,11 @@ button {
     & .movie-card {
       display: flex;
       flex-direction: column;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
 
       & .card-image-wrapper {
         position: relative;
@@ -238,7 +243,7 @@ button {
           justify-content: center;
           font-weight: 700;
           font-size: 0.8rem;
-          border: 2px solid var(--tmdb-green);
+          border: 2px solid #ffffff;
         }
       }
 
@@ -334,7 +339,12 @@ button {
           height: 60px;
           font-size: 1.2rem;
           background: #081c22;
-          border: 3px solid var(--tmdb-green);
+          border-radius: 50%;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 3px solid #ffffff;
         }
 
         & .release-date, & .genres, & .runtime {
@@ -398,5 +408,47 @@ button {
         }
       }
     }
+  }
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+    padding: 15px 20px;
+    & .navbar-content {
+      flex-direction: column;
+      gap: 15px;
+    }
+  }
+
+  .hero .hero-content h2 { font-size: 2rem; }
+  .hero .hero-content p { font-size: 1.2rem; }
+  .hero .hero-content .search-box {
+    flex-direction: column;
+    & button { width: 100%; }
+  }
+
+  .focus-banner {
+    & .banner-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+      
+      & .poster-container {
+        width: 200px;
+      }
+      
+      & .meta-data {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+  }
+
+  .media-section .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 }
