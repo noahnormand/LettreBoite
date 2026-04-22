@@ -8,13 +8,15 @@ class Affichage {
         return path ? `${this.imageBaseUrl}${path}` : this.fallbackImage;
     }
 
-    renderCards(items, containerId) {
+    renderCards(items, containerId, limit = 4) {
         const container = document.getElementById(containerId);
         if (!container) return;
 
         container.innerHTML = '';
 
-        items.forEach(item => {
+        const displayedItems = items.slice(0, limit);
+
+        displayedItems.forEach(item => {
             const title = item.title || item.name;
             const releaseDate = item.release_date || item.first_air_date || '';
             const rating = item.vote_average ? Math.round(item.vote_average * 10) + '%' : 'NR';

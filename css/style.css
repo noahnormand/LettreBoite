@@ -205,7 +205,7 @@ button {
 
   & .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 
     & .movie-card {
@@ -418,6 +418,28 @@ button {
   }
 }
 
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movie-card {
+  animation: fadeInUp 0.4s ease both;
+}
+
+/* Délai progressif sur les 4 premières cartes */
+.cards-grid .movie-card:nth-child(1) { animation-delay: 0.05s; }
+.cards-grid .movie-card:nth-child(2) { animation-delay: 0.1s; }
+.cards-grid .movie-card:nth-child(3) { animation-delay: 0.15s; }
+.cards-grid .movie-card:nth-child(4) { animation-delay: 0.2s; }
+
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 768px) {
   .navbar {
@@ -457,5 +479,9 @@ button {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .media-section .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
