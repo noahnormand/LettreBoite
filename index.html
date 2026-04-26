@@ -49,60 +49,30 @@
             </div>
         </div>
 
-        <div class="cards-grid" id="trending-grid">
+        <div class="cards-grid" id="trending-grid"></div>
+    </section>
 
-            <article class="movie-card">
-                <div class="card-image-wrapper">
-
-                    <div class="placeholder-img"
-                         style="width: 150px; height: 225px; background: #ddd; border-radius: 0;"></div>
-                    <div class="rating-badge">
-                        <span>75%</span>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3>Dune 15 sept 2021</h3>
-                    <p class="release-date">15 sept 2021</p>
-                </div>
-            </article>
-            <article class="movie-card">
-                <div class="card-image-wrapper">
-                    <!-- Image temporaire -->
-                    <div class="placeholder-img"
-                         style="width: 150px; height: 225px; background: #ddd; border-radius: 0;"></div>
-                    <div class="rating-badge">
-                        <span>82%</span>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h3>Squid Game</h3>
-                    <p class="release-date">15 sept 2021</p>
-                </div>
-            </article>
+    <section class="media-section" id="series-section">
+        <div class="section-header">
+            <h2>Séries</h2>
+            <div class="toggle-group filter-group">
+                <button class="toggle-btn active" data-type="series" data-filter="popular">Populaire</button>
+                <button class="toggle-btn" data-type="series" data-filter="top_rated">Mieux notées</button>
+            </div>
         </div>
-        <section class="media-section" id="series-section">
-            <div class="section-header">
-                <h2>Séries</h2>
-                <div class="toggle-group filter-group">
-                    <button class="toggle-btn active" data-type="series" data-filter="popular">Populaire</button>
-                    <button class="toggle-btn" data-type="series" data-filter="top_rated">Mieux notées</button>
-                </div>
-            </div>
-            <div class="cards-grid" id="series-grid">
-            </div>
-        </section>
+        <div class="cards-grid" id="series-grid"></div>
+    </section>
 
-        <section class="media-section" id="movies-section">
-            <div class="section-header">
-                <h2>Films</h2>
-                <div class="toggle-group filter-group">
-                    <button class="toggle-btn active" data-type="movies" data-filter="popular">Populaire</button>
-                    <button class="toggle-btn" data-type="movies" data-filter="top_rated">Mieux notés</button>
-                </div>
+    <section class="media-section" id="movies-section">
+        <div class="section-header">
+            <h2>Films</h2>
+            <div class="toggle-group filter-group">
+                <button class="toggle-btn active" data-type="movies" data-filter="popular">Populaire</button>
+                <button class="toggle-btn" data-type="movies" data-filter="top_rated">Mieux notés</button>
             </div>
-            <div class="cards-grid" id="movies-grid">
-            </div>
-        </section>
+        </div>
+        <div class="cards-grid" id="movies-grid"></div>
+    </section>
 
 </main>
 
@@ -110,6 +80,7 @@
     <p>&copy; 2026 Projet Film TMDB. Clone design Figma.</p>
 </footer>
 
+<script src="js/config.js"></script>
 <script src="js/TMDBApi.js"></script>
 <script src="js/Affichage.js"></script>
 <script src="js/app.js"></script>
