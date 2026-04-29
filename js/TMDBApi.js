@@ -1,6 +1,6 @@
 class TMDBApi {
     constructor() {
-        this.apiKey = '0dde7858f9e02bd7ac76b47d569bc963';
+        this.apiKey = TMDB_API_KEY;
         this.baseUrl = 'https://api.themoviedb.org/3';
         this.language = 'fr-FR';
     }
@@ -37,7 +37,7 @@ class TMDBApi {
     }
 
     async search(query) {
-        return this.fetchAPI('/search/multi', { query });
+        return this.fetchAPI('/search/multi', {query});
     }
 
     async getDetails(id, type) {
