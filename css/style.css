@@ -564,35 +564,3 @@ button {
     }
   }
 }
-      flex-direction: column;
-      text-align: center;
-      gap: 20px;
-      
-      & .poster-container {
-        width: 200px;
-      }
-      
-      & .meta-data {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-    }
-  }
-
-  .media-section .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .media-section .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Accessibilite : desactiver les animations si l'utilisateur le prefere */
-@media (prefers-reduced-motion: reduce) {
-  .movie-card {
-    animation: none;
-  }
-}
