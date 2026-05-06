@@ -485,3 +485,10 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Accessibilite : desactiver les animations si l'utilisateur le prefere */
+@media (prefers-reduced-motion: reduce) {
+  .movie-card {
+    animation: none;
+  }
+}
