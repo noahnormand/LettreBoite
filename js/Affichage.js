@@ -8,6 +8,34 @@ class Affichage {
         return path ? `${this.imageBaseUrl}${path}` : this.fallbackImage;
     }
 
+    // ---- FAVORIS ----
+    static getFavorites() {
+        return JSON.parse(localStorage.getItem('lettreboite_favorites') || '[]');
+    }
+
+    static isFavorite(id) {
+        return Affichage.getFavorites().some(f => f.id === id);
+    }
+
+    static toggleFavorite(item) {
+        const favs = Affichage.getFavorites();
+        const idx = favs.findIndex(f => f.id === item.id);
+        if (idx === -1) {
+            favs.push(item);
+        } else {
+            favs.splice(idx, 1);
+        }
+        localStorage.setItem('lettreboite_favorites', JSON.stringify(favs));
+    }
+
+    renderFavorites(containerId) {
+        const favs = Affichage.getFavorites();
+        const section = document.getElementById('favorites-section');
+        if (section) section.style.display = favs.length ? 'block' : 'none';
+        this.renderCards(favs, containerId, favs.length);
+    }
+    // ------------------
+
     renderCards(items, containerId, limit = 4) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -22,19 +50,23 @@ class Affichage {
             const rating = item.vote_average ? Math.round(item.vote_average * 10) + '%' : 'NR';
             const imageUrl = this.getImageUrl(item.poster_path);
             const mediaType = item.media_type || (item.title ? 'movie' : 'tv');
+            const isFav = Affichage.isFavorite(item.id);
 
             const card = document.createElement('article');
             card.className = 'movie-card';
-            
+
             card.innerHTML = `
-                <a href="focus.html?id=${item.id}&type=${mediaType}">
-                    <div class="card-image-wrapper">
+                <div class="card-image-wrapper">
+                    <a href="focus.html?id=${item.id}&type=${mediaType}">
                         <img src="${imageUrl}" alt="${title}" loading="lazy">
-                        <div class="rating-badge">
-                            <span>${rating}</span>
-                        </div>
+                    </a>
+                    <div class="rating-badge">
+                        <span>${rating}</span>
                     </div>
-                </a>
+                    <button class="fav-btn ${isFav ? 'active' : ''}" aria-label="Favoris">
+                        <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
+                    </button>
+                </div>
                 <div class="card-content">
                     <a href="focus.html?id=${item.id}&type=${mediaType}">
                         <h3>${title}</h3>
@@ -42,6 +74,18 @@ class Affichage {
                     <p class="release-date">${releaseDate}</p>
                 </div>
             `;
+
+            card.querySelector('.fav-btn').addEventListener('click', () => {
+                Affichage.toggleFavorite(item);
+                const isNowFav = Affichage.isFavorite(item.id);
+                const btn = card.querySelector('.fav-btn');
+                btn.classList.toggle('active', isNowFav);
+                btn.querySelector('i').className = `fa-${isNowFav ? 'solid' : 'regular'} fa-heart`;
+                // Mise à jour section favoris si elle existe
+                const favGrid = document.getElementById('favorites-grid');
+                if (favGrid) this.renderFavorites('favorites-grid');
+            });
+
             container.appendChild(card);
         });
     }

@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isFocusPage = document.getElementById('media-details') !== null;
 
     if (isHomePage) {
+        affichage.renderFavorites('favorites-grid');
         initHome();
     } else if (isFocusPage) {
         initFocus();
