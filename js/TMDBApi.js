@@ -1,6 +1,6 @@
 class TMDBApi {
     constructor() {
-        this.apiKey = TMDB_API_KEY;
+        this.apiKey = '0dde7858f9e02bd7ac76b47d569bc963';
         this.baseUrl = 'https://api.themoviedb.org/3';
         this.language = 'fr-FR';
     }
