@@ -418,6 +418,31 @@ button {
   }
 }
 
+/* --- LOGO ICONE --- */
+.navbar .logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .logo i {
+  font-size: 2rem;
+  color: var(--text-inverse);
+}
+
+/* --- HAMBURGER --- */
+.hamburger {
+  display: none;
+  background: transparent;
+  color: var(--text-inverse);
+  font-size: 1.4rem;
+  padding: 4px 8px;
+}
+
+/* --- FOOTER --- */
+.footer {
+  display: none;
+}
+
 /* --- ANIMATIONS --- */
 @keyframes fadeInUp {
   from {
@@ -440,26 +465,105 @@ button {
 .cards-grid .movie-card:nth-child(3) { animation-delay: 0.15s; }
 .cards-grid .movie-card:nth-child(4) { animation-delay: 0.2s; }
 
-/* --- RESPONSIVE DESIGN --- */
+@media (prefers-reduced-motion: reduce) {
+  .movie-card { animation: none; }
+}
+
+/* --- RESPONSIVE TABLETTE (768px) --- */
 @media (max-width: 768px) {
   .navbar {
-    height: auto;
-    padding: 15px 20px;
+    height: 56px;
+    padding: 0 20px;
+
     & .navbar-content {
-      flex-direction: column;
-      gap: 15px;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    & .nav-links {
+      display: none;
+      position: absolute;
+      top: 56px;
+      left: 0;
+      right: 0;
+      background: var(--tmdb-dark-blue);
+      padding: 16px 20px;
+      z-index: 100;
+
+      &.open {
+        display: block;
+      }
+
+      & ul {
+        flex-direction: column;
+        gap: 16px;
+      }
     }
   }
 
-  .hero .hero-content h2 { font-size: 2rem; }
-  .hero .hero-content p { font-size: 1.2rem; }
-  .hero .hero-content .search-box {
-    flex-direction: column;
-    & button { width: 100%; }
+  .hamburger {
+    display: block;
+  }
+
+  .hero {
+    padding: 30px 20px;
+    min-height: 280px;
+
+    & .hero-content h2 { font-size: 2rem; }
+    & .hero-content p { font-size: 1.1rem; margin-bottom: 24px; }
+    & .hero-content .search-box {
+      flex-direction: row;
+    }
+  }
+
+  .media-section {
+    padding: 0 20px;
+    margin: 28px auto;
+
+    & .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
   }
 
   .focus-banner {
     & .banner-content {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 20px;
+      gap: 24px;
+
+      & .poster-container {
+        width: 160px;
+      }
+
+      & .info-container .title {
+        font-size: 1.6rem;
+      }
+
+      & .info-container .meta-data {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    }
+  }
+}
+
+/* --- RESPONSIVE MOBILE (480px) --- */
+@media (max-width: 480px) {
+  .media-section {
+    & .cards-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  .hero {
+    & .hero-content .search-box {
+      flex-direction: column;
+      & button { width: 100%; }
+    }
+  }
+}
       flex-direction: column;
       text-align: center;
       gap: 20px;

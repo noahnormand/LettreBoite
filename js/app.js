@@ -2,6 +2,15 @@ const api = new TMDBApi();
 const affichage = new Affichage();
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Hamburger menu toggle
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+    }
+
     const isHomePage = document.getElementById('trending-grid') !== null;
     const isFocusPage = document.getElementById('media-details') !== null;
 
