@@ -12,11 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isHomePage = document.getElementById('trending-grid') !== null;
     const isFocusPage = document.getElementById('media-details') !== null;
+    const isActorPage = document.getElementById('actor-details') !== null;
+
     if (isHomePage) {
         affichage.renderFavorites('favorites-grid');
         initHome();
     } else if (isFocusPage) {
         initFocus();
+    } else if (isActorPage) {
+        initActor();
     }
 });
 

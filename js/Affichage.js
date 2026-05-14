@@ -90,6 +90,34 @@ class Affichage {
         });
     }
 
+    renderTrailer(videos, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const trailer = videos.find(v => v.type === 'Trailer' && v.site === 'YouTube')
+                     || videos.find(v => v.site === 'YouTube');
+
+        if (!trailer) {
+            container.style.display = 'none';
+            return;
+        }
+
+        container.innerHTML = `
+            <div class="section-header">
+                <h2>Bande annonce</h2>
+            </div>
+            <div class="trailer-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/${trailer.key}"
+                    title="${trailer.name}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        `;
+    }
+
     renderCast(cast, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -104,89 +132,57 @@ class Affichage {
             card.className = 'actor-card movie-card';
 
             card.innerHTML = `
-                <div class="card-image-wrapper actor-image">
-                    <img src="${imageUrl}" alt="${actor.name}" loading="lazy">
-                </div>
-                <div class="card-content actor-info">
-                    <h4>${actor.name}</h4>
-                    <p class="release-date">${actor.character}</p>
-                </div>
+                <a href="actor.html?id=${actor.id}">
+                    <div class="card-image-wrapper actor-image">
+                        <img src="${imageUrl}" alt="${actor.name}" loading="lazy">
+                    </div>
+                    <div class="card-content actor-info">
+                        <h4>${actor.name}</h4>
+                        <p class="release-date">${actor.character}</p>
+                    </div>
+                </a>
             `;
             container.appendChild(card);
         });
     }
 
-    displayError(message, containerId) {
+    updateActorDetails(person) {
+        const nameEl = document.getElementById('actor-name');
+        const photoEl = document.getElementById('actor-photo');
+        const birthdayEl = document.getElementById('actor-birthday');
+        const birthplaceEl = document.getElementById('actor-birthplace');
+        const knownForEl = document.getElementById('actor-known-for');
+        const bioEl = document.getElementById('actor-biography');
+
+        if (nameEl) nameEl.textContent = person.name || '';
+
+        if (photoEl) {
+            const imageUrl = this.getImageUrl(person.profile_path);
+            photoEl.innerHTML = `<img src="${imageUrl}" alt="${person.name}">`;
+        }
+
+        if (birthdayEl && person.birthday) {
+            birthdayEl.innerHTML = `<i class="fa-regular fa-calendar"></i> ${person.birthday}${person.deathday ? ' — ' + person.deathday : ''}`;
+        }
+
+        if (birthplaceEl && person.place_of_birth) {
+            birthplaceEl.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${person.place_of_birth}`;
+        }
+
+        if (knownForEl && person.known_for_department) {
+            knownForEl.innerHTML = `<i class="fa-solid fa-star"></i> Connu pour : ${person.known_for_department}`;
+        }
+
+        if (bioEl) {
+            bioEl.textContent = person.biography || 'Aucune biographie disponible.';
+        }
+    }
+
+    renderPersonCredits(credits, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
-        
-        container.innerHTML = `
-            <div class="error-message" style="color: red; padding: 20px;">
-                <p>Oups ! ${message}</p>
-            </div>
-        `;
-    }
 
-    showLoader(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        
-        container.innerHTML = `
-            <div class="loader" style="padding: 20px;">
-                <p>Chargement en cours...</p>
-            </div>
-        `;
-    }
-    
-    updateMediaDetails(data) {
-        const titleEl = document.getElementById('media-title');
-        const overviewEl = document.getElementById('media-overview');
-        const posterEl = document.getElementById('media-poster');
-        const ratingEl = document.getElementById('media-rating');
-        const dateEl = document.getElementById('media-release-date');
-        const genresEl = document.getElementById('media-genres');
-        const runtimeEl = document.getElementById('media-runtime');
-
-        if (titleEl) {
-            const title = data.title || data.name;
-            const yearStr = (data.release_date || data.first_air_date || '').split('-')[0];
-            titleEl.innerHTML = `${title} <span class="year">(${yearStr})</span>`;
-        }
-        
-        if (overviewEl) {
-            overviewEl.textContent = data.overview || '';
-        }
-        
-        if (posterEl) {
-            const imageUrl = this.getImageUrl(data.poster_path);
-            posterEl.innerHTML = `<img src="${imageUrl}" alt="Poster">`;
-        }
-
-        if (ratingEl) {
-            const rating = data.vote_average ? Math.round(data.vote_average * 10) + '%' : 'NR';
-            ratingEl.innerHTML = `<span>${rating}</span>`;
-        }
-
-        if (dateEl) {
-            dateEl.textContent = data.release_date || data.first_air_date || '';
-        }
-
-        if (genresEl) {
-            genresEl.textContent = data.genres ? data.genres.map(g => g.name).join(', ') : '';
-        }
-        
-        if (runtimeEl) {
-            if (data.runtime) {
-                const hours = Math.floor(data.runtime / 60);
-                const mins = data.runtime % 60;
-                runtimeEl.textContent = `${hours}h ${mins}m`;
-                runtimeEl.style.display = 'inline';
-            } else if (data.episode_run_time && data.episode_run_time.length > 0) {
-                runtimeEl.textContent = `${data.episode_run_time[0]}m`;
-                runtimeEl.style.display = 'inline';
-            } else {
-                runtimeEl.style.display = 'none';
-            }
-        }
-    }
-}
+        // Fusionner films + séries, dédoublonner, trier par popularité
+        const all = [...(credits.cast || [])];
+        const seen = new Set();
+     
