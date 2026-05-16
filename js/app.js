@@ -54,7 +54,7 @@ function setupHomeListeners() {
     const searchFilters = document.getElementById('search-filters');
 
     if (searchBtn && searchInput) {
-        const doSearch = async () => {
+        searchBtn.addEventListener('click', async () => {
             const query = searchInput.value.trim();
             if (query) {
                 affichage.showLoader('trending-grid');
@@ -63,9 +63,7 @@ function setupHomeListeners() {
                     lastSearchResults = searchResponse.results;
                     const titleEl = document.querySelector('#trending-section h2');
                     if (titleEl) titleEl.textContent = 'Résultats de recherche';
-                    // Afficher les filtres de recherche
                     if (searchFilters) searchFilters.style.display = 'flex';
-                    // Réinitialiser le filtre sur "Tout"
                     document.querySelectorAll('#search-filters .toggle-btn').forEach(b => b.classList.remove('active'));
                     const allBtn = document.querySelector('#search-filters [data-type-filter="all"]');
                     if (allBtn) allBtn.classList.add('active');
@@ -74,11 +72,6 @@ function setupHomeListeners() {
                     affichage.displayError('Erreur lors de la recherche.', 'trending-grid');
                 }
             }
-        };
-
-        searchBtn.addEventListener('click', doSearch);
-        searchInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') doSearch();
         });
     }
 
