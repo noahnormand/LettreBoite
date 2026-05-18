@@ -117,7 +117,7 @@ button {
     margin: 0 auto;
     padding-bottom: 20px;
 
-    & h2 {
+    & h1 {
       font-size: 3rem;
       font-weight: 700;
       line-height: 1;
@@ -376,7 +376,7 @@ button {
       }
     }
 
-    & .synopsis-section h3 {
+    & .synopsis-section h2 {
       font-size: 1.2rem;
       font-weight: 700;
       margin-bottom: 10px;
@@ -482,7 +482,7 @@ button {
       & .synopsis-section {
         margin-top: 20px;
 
-        & h3 {
+        & h2 {
           font-size: 1.2rem;
           font-weight: 700;
           margin-bottom: 10px;
