@@ -47,4 +47,16 @@ class TMDBApi {
     async getCredits(id, type) {
         return this.fetchAPI(`/${type}/${id}/credits`);
     }
+
+    async getVideos(id, type) {
+        return this.fetchAPI(`/${type}/${id}/videos`);
+    }
+
+    async getPersonDetails(id) {
+        return this.fetchAPI(`/person/${id}`);
+    }
+
+    async getPersonCredits(id) {
+        return this.fetchAPI(`/person/${id}/combined_credits`);
+    }
 }

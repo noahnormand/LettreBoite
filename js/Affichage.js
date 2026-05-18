@@ -90,6 +90,34 @@ class Affichage {
         });
     }
 
+    renderTrailer(videos, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        const trailer = videos.find(v => v.type === 'Trailer' && v.site === 'YouTube')
+                     || videos.find(v => v.site === 'YouTube');
+
+        if (!trailer) {
+            container.style.display = 'none';
+            return;
+        }
+
+        container.innerHTML = `
+            <div class="section-header">
+                <h2>Bande annonce</h2>
+            </div>
+            <div class="trailer-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/${trailer.key}"
+                    title="${trailer.name}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        `;
+    }
+
     renderCast(cast, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -104,16 +132,67 @@ class Affichage {
             card.className = 'actor-card movie-card';
 
             card.innerHTML = `
-                <div class="card-image-wrapper actor-image">
-                    <img src="${imageUrl}" alt="${actor.name}" loading="lazy">
-                </div>
-                <div class="card-content actor-info">
-                    <h4>${actor.name}</h4>
-                    <p class="release-date">${actor.character}</p>
-                </div>
+                <a href="actor.html?id=${actor.id}">
+                    <div class="card-image-wrapper actor-image">
+                        <img src="${imageUrl}" alt="${actor.name}" loading="lazy">
+                    </div>
+                    <div class="card-content actor-info">
+                        <h4>${actor.name}</h4>
+                        <p class="release-date">${actor.character}</p>
+                    </div>
+                </a>
             `;
             container.appendChild(card);
         });
+    }
+
+    updateActorDetails(person) {
+        const nameEl = document.getElementById('actor-name');
+        const photoEl = document.getElementById('actor-photo');
+        const birthdayEl = document.getElementById('actor-birthday');
+        const birthplaceEl = document.getElementById('actor-birthplace');
+        const knownForEl = document.getElementById('actor-known-for');
+        const bioEl = document.getElementById('actor-biography');
+
+        if (nameEl) nameEl.textContent = person.name || '';
+
+        if (photoEl) {
+            const imageUrl = this.getImageUrl(person.profile_path);
+            photoEl.innerHTML = `<img src="${imageUrl}" alt="${person.name}">`;
+        }
+
+        if (birthdayEl && person.birthday) {
+            birthdayEl.innerHTML = `<i class="fa-regular fa-calendar"></i> ${person.birthday}${person.deathday ? ' — ' + person.deathday : ''}`;
+        }
+
+        if (birthplaceEl && person.place_of_birth) {
+            birthplaceEl.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${person.place_of_birth}`;
+        }
+
+        if (knownForEl && person.known_for_department) {
+            knownForEl.innerHTML = `<i class="fa-solid fa-star"></i> Connu pour : ${person.known_for_department}`;
+        }
+
+        if (bioEl) {
+            bioEl.textContent = person.biography || 'Aucune biographie disponible.';
+        }
+    }
+
+    renderPersonCredits(credits, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        // Fusionner films + séries, dédoublonner, trier par popularité
+        const all = [...(credits.cast || [])];
+        const seen = new Set();
+        const unique = all.filter(item => {
+            if (seen.has(item.id)) return false;
+            seen.add(item.id);
+            return true;
+        });
+        unique.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
+
+        this.renderCards(unique, containerId, Math.min(unique.length, 16));
     }
 
     displayError(message, containerId) {
