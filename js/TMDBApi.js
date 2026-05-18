@@ -47,5 +47,4 @@ class TMDBApi {
     async getCredits(id, type) {
         return this.fetchAPI(`/${type}/${id}/credits`);
     }
-
- 
+}
